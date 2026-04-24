@@ -79,8 +79,8 @@ export default function Compare() {
 
             <div className="mt-6 border border-slate-800 rounded-xl p-5 bg-[#020617]">
 
-                <div className="flex flex-col sm:flex-row gap-4">
-                    <div className="flex gap-4 flex-1">
+                <div className="flex flex-col gap-4">
+                    
                         <input
                             value={input}
                             onChange={e => setInput(e.target.value)}
@@ -94,7 +94,7 @@ export default function Compare() {
                             className="w-full sm:w-20 bg-transparent border border-slate-700 rounded-lg px-3 py-2 text-sm outline-none focus:border-cyan-400"
                             placeholder="Frames"
                         />
-                    </div>
+                    
 
 
 
