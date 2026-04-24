@@ -121,12 +121,11 @@ export default function DemandPaging() {
                         <p className="text-xs text-slate-400 mt-2">
                             {textbookExamples.find(e => e.data === input)?.note}
                         </p>
-                        <button
-                            onClick={reset}
-                            className="border border-slate-700 px-4 rounded-lg text-sm"
-                        >
-                            reset
-                        </button>
+                        <div className="flex justify-center sm:justify-end mt-3">
+                            <button className="btn-outline">
+                                Reset
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div className="mt-6 border border-slate-800 rounded-xl p-5 bg-[#020617]">
@@ -295,6 +294,6 @@ export default function DemandPaging() {
                     </div>
                 </div>
             </div>
-            </div>   
-            )
+        </div>
+    )
 }
