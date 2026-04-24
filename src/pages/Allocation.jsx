@@ -365,7 +365,7 @@ export default function Allocation() {
 
                                 <button
                                     onClick={() => removeProcess(i)}
-                                    className="text-red-400"
+                                    className="text-red"
                                 >
                                     ✕
                                 </button>

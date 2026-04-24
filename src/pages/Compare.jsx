@@ -79,29 +79,29 @@ export default function Compare() {
 
             <div className="mt-6 border border-slate-800 rounded-xl p-5 bg-[#020617]">
 
-                <div className="flex flex-col gap-4">
-                    <div className="flex flex-col sm:flex-row gap-4">
-                        <input
-                            value={input}
-                            onChange={e => setInput(e.target.value)}
-                            className="flex-1 bg-transparent border border-slate-700 rounded-lg px-3 py-2 text-sm outline-none focus:border-cyan-400"
-                            placeholder="Reference String (eg: 1,2,3)"
-                        />
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4">
 
-                        <input
-                            value={frames}
-                            onChange={e => setFrames(e.target.value)}
-                            className="w-full max-w-[120px] bg-transparent border border-slate-700 rounded-lg px-3 py-2 text-sm outline-none focus:border-cyan-400"
-                            placeholder="Frames"
-                        />
+                    {/* Reference Input */}
+                    <input
+                        value={input}
+                        onChange={e => setInput(e.target.value)}
+                        placeholder="Reference String (eg: 1,2,3)"
+                        className="flex-1 bg-transparent border border-slate-700 rounded-lg px-3 py-2 text-sm outline-none focus:border-cyan-400"
+                    />
 
-                    </div>
+                    {/* Frames Input */}
+                    <input
+                        value={frames}
+                        onChange={e => setFrames(e.target.value)}
+                        placeholder="Frames"
+                        className="w-full sm:w-[100px] bg-transparent border border-slate-700 rounded-lg px-3 py-2 text-sm outline-none focus:border-cyan-400"
+                    />
 
-
+                    {/* Compare Button */}
                     <button
                         onClick={run}
                         disabled={!input || !frames}
-                        className={`w-full sm:w-[200px] px-5 py-2 rounded-lg text-sm font-semibold transition ${!input || !frames
+                        className={`w-full sm:w-[160px] px-5 py-2 rounded-lg text-sm font-semibold transition ${!input || !frames
                             ? "bg-slate-700 text-slate-400 cursor-not-allowed"
                             : "bg-cyan-400 hover:bg-cyan-300 text-black"
                             }`}
@@ -110,27 +110,51 @@ export default function Compare() {
                     </button>
 
                 </div>
+                {/* Row: Examples + Reset */}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-5 gap-3">
 
-                <div className="flex flex-wrap gap-2 mt-4">
-                    {textbookExamples.map((ex, i) => (
+                    {/* LEFT SIDE → Examples */}
+                    <div>
+                        <p className="text-sm text-slate-300 mb-2 font-medium">
+                            Examples
+                        </p>
+
+                        <div className="flex flex-wrap gap-2">
+                            {textbookExamples.map((ex, i) => (
+                                <button
+                                    key={i}
+                                    onClick={() => {
+                                        setInput(ex.data)
+                                        setFrames(ex.frames)
+                                    }}
+                                    className="chip"
+                                >
+                                    {ex.name}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* RIGHT SIDE → Reset */}
+                    <div className="flex justify-center sm:justify-end">
                         <button
-                            key={i}
                             onClick={() => {
-                                setInput(ex.data)
-                                setFrames(String(ex.frames))
+                                setInput("")
+                                setFrames("")
                                 setData([])
                             }}
-                            className="chip"
+                            className="btn-outline"
                         >
-                            {ex.name}
+                            Reset
                         </button>
-                    ))}
+                    </div>
+
                 </div>
 
-                <p className="text-xs text-slate-400 mt-2">
+                {/* Note stays below */}
+                <p className="text-xs text-slate-400 mt-3">
                     {textbookExamples.find(e => e.data === input)?.note}
                 </p>
-
             </div>
 
             {data.length > 0 && (
