@@ -87,7 +87,7 @@ export default function DemandPaging() {
                 Pages are loaded only when required. Page fault occurs if page not in memory.
             </p>
             <div className="mt-6 border border-slate-800 rounded-xl p-5 bg-[#020617]">
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
                     <input
                         value={input}
                         onChange={e => setInput(e.target.value)}
@@ -100,200 +100,201 @@ export default function DemandPaging() {
                         className="w-20 bg-transparent border border-slate-700 rounded-lg px-3 py-2 text-sm outline-none focus:border-cyan-400"
                         placeholder="Frames"
                     />
-                    <p className="label mt-4">Examples</p>
+                    <div className="w-full mt-4 sm:mt-2">
+                        <p className="label mb-2">Examples</p>
+                        <div className="flex flex-wrap gap-2">
+                            {textbookExamples.map((ex, i) => (
+                                <button
+                                    key={i}
+                                    onClick={() => {
+                                        setInput(ex.data)
+                                        setFrames(String(ex.frames))
+                                        setStep(0)
+                                    }}
+                                    className="chip"
+                                >
+                                    {ex.name}
+                                </button>
+                            ))}
+                        </div>
 
-                    <div className="flex flex-wrap gap-2">
-                        {textbookExamples.map((ex, i) => (
+                        <p className="text-xs text-slate-400 mt-2">
+                            {textbookExamples.find(e => e.data === input)?.note}
+                        </p>
+                        <button
+                            onClick={reset}
+                            className="border border-slate-700 px-4 rounded-lg text-sm"
+                        >
+                            reset
+                        </button>
+                    </div>
+                </div>
+                <div className="mt-6 border border-slate-800 rounded-xl p-5 bg-[#020617]">
+                    <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 items-center">
+                        <div className="text-sm text-slate-400">
+                            Step {step + 1} of {ref.length}
+                        </div>
+                        <div className="flex gap-3">
                             <button
-                                key={i}
-                                onClick={() => {
-                                    setInput(ex.data)
-                                    setFrames(String(ex.frames))
-                                    setStep(0)
-                                }}
-                                className="chip"
+                                onClick={prev}
+                                className="border border-slate-700 px-3 py-1 rounded text-sm"
                             >
-                                {ex.name}
+                                prev
                             </button>
-                        ))}
-                    </div>
-
-                    <p className="text-xs text-slate-400 mt-2">
-                        {textbookExamples.find(e => e.data === input)?.note}
-                    </p>
-                    <button
-                        onClick={reset}
-                        className="border border-slate-700 px-4 rounded-lg text-sm"
-                    >
-                        reset
-                    </button>
-                </div>
-            </div>
-            <div className="mt-6 border border-slate-800 rounded-xl p-5 bg-[#020617]">
-                <div className="flex justify-between items-center">
-                    <div className="text-sm text-slate-400">
-                        Step {step + 1} of {ref.length}
-                    </div>
-                    <div className="flex gap-3">
-                        <button
-                            onClick={prev}
-                            className="border border-slate-700 px-3 py-1 rounded text-sm"
-                        >
-                            prev
-                        </button>
-                        <button
-                            onClick={next}
-                            className="bg-cyan-400 text-black px-3 py-1 rounded text-sm"
-                        >
-                            next
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div className="mt-6 border border-slate-800 rounded-xl p-6 bg-[#020617]">
-                <div className="flex items-center justify-between">
-                    {/* CPU */}
-                    <div className="flex flex-col items-center">
-                        <div className="text-xs text-slate-400 mb-2">
-                            CPU
-                        </div>
-                        <div className={
-                            "w-14 h-14 flex items-center justify-center rounded-lg border " +
-                            (log[step]?.type === "fault"
-                                ? "border-red-400 shadow-[0_0_20px_rgba(248,113,113,0.7)]"
-                                : "border-slate-700")
-                        }>
-                            ⚙️
-                        </div>
-                    </div>
-                    {/* arrow cpu->disk */}
-                    <div className="flex-1 flex justify-center">
-                        <div className={
-                            "h-1 w-24 rounded " +
-                            (log[step]?.type === "fault"
-                                ? "bg-red-400 animate-pulse"
-                                : "bg-slate-700")
-                        } />
-                    </div>
-                    {/* disk */}
-                    <div className="flex flex-col items-center">
-                        <div className="text-xs text-slate-400 mb-2">
-                            Disk
-                        </div>
-                        <div className={
-                            "w-14 h-14 flex items-center justify-center rounded-full border " +
-                            (log[step]?.type === "fault"
-                                ? "border-red-400 shadow-[0_0_25px_rgba(248,113,113,0.9)] animate-spin"
-                                : "border-slate-700")
-                        }>
-                            💿
-                        </div>
-                    </div>
-                    {/* arrow disk->memory */}
-                    <div className="flex-1 flex justify-center">
-                        <div className={
-                            "h-1 w-24 rounded " +
-                            (log[step]?.type === "fault"
-                                ? "bg-cyan-400 animate-pulse"
-                                : "bg-slate-700")
-                        } />
-                    </div>
-                    {/* memory */}
-                    <div className="flex flex-col items-center">
-                        <div className="text-xs text-slate-400 mb-2">
-                            Memory
-                        </div>
-                        <div className={
-                            "w-14 h-14 flex items-center justify-center rounded-full border text-lg " +
-                            (log[step]?.type === "fault"
-                                ? "border-red-400 animate-spin"
-                                : "border-slate-700")
-                        }>
-                            {log[step]?.type === "fault"
-                                ? log[step]?.page
-                                : "💿"}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="grid grid-cols-3 gap-6 mt-6">
-                <div className="border border-slate-800 rounded-xl p-5 bg-[#020617]">
-                    <p className="text-sm text-slate-400">
-                        CPU reference string
-                    </p>
-                    <div className="flex gap-2 mt-3 flex-wrap">
-                        {ref.map((p, i) => (
-                            <div
-                                key={i}
-                                className={
-                                    i === step
-                                        ? "bg-cyan-400 text-black w-8 h-8 flex items-center justify-center rounded shadow-[0_0_15px_rgba(34,211,238,0.8)] transition-all duration-500 scale-110"
-                                        : "bg-slate-800 w-8 h-8 flex items-center justify-center rounded transition-all"
-                                }
+                            <button
+                                onClick={next}
+                                className="bg-cyan-400 text-black px-3 py-1 rounded text-sm"
                             >
-                                {p}
-                            </div>
-                        ))}
+                                next
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div className="border border-slate-800 rounded-xl p-5 bg-[#020617]">
-                    <p className="text-sm text-slate-400">
-                        physical memory
-                    </p>
-                    <div className="mt-3 space-y-2">
-                        {memory.map((m, i) => {
-                            const isNewLoad =
-                                log[step]?.type === "fault" &&
-                                memory[i] === log[step]?.page
-                            return (
+                <div className="mt-6 border border-slate-800 rounded-xl p-6 bg-[#020617]">
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-4">
+                        {/* CPU */}
+                        <div className="flex flex-col items-center">
+                            <div className="text-xs text-slate-400 mb-2">
+                                CPU
+                            </div>
+                            <div className={
+                                "w-14 h-14 flex items-center justify-center rounded-lg border " +
+                                (log[step]?.type === "fault"
+                                    ? "border-red-400 shadow-[0_0_20px_rgba(248,113,113,0.7)]"
+                                    : "border-slate-700")
+                            }>
+                                ⚙️
+                            </div>
+                        </div>
+                        {/* arrow cpu->disk */}
+                        <div className="w-full sm:flex-1 flex justify-center">
+                            <div className={
+                                "h-1 w-24 rounded " +
+                                (log[step]?.type === "fault"
+                                    ? "bg-red-400 animate-pulse"
+                                    : "bg-slate-700")
+                            } />
+                        </div>
+                        {/* disk */}
+                        <div className="flex flex-col items-center">
+                            <div className="text-xs text-slate-400 mb-2">
+                                Disk
+                            </div>
+                            <div className={
+                                "w-14 h-14 flex items-center justify-center rounded-full border " +
+                                (log[step]?.type === "fault"
+                                    ? "border-red-400 shadow-[0_0_25px_rgba(248,113,113,0.9)] animate-spin"
+                                    : "border-slate-700")
+                            }>
+                                💿
+                            </div>
+                        </div>
+                        {/* arrow disk->memory */}
+                        <div className="flex-1 flex justify-center">
+                            <div className={
+                                "h-1 w-24 rounded " +
+                                (log[step]?.type === "fault"
+                                    ? "bg-cyan-400 animate-pulse"
+                                    : "bg-slate-700")
+                            } />
+                        </div>
+                        {/* memory */}
+                        <div className="flex flex-col items-center">
+                            <div className="text-xs text-slate-400 mb-2">
+                                Memory
+                            </div>
+                            <div className={
+                                "w-14 h-14 flex items-center justify-center rounded-full border text-lg " +
+                                (log[step]?.type === "fault"
+                                    ? "border-red-400 animate-spin"
+                                    : "border-slate-700")
+                            }>
+                                {log[step]?.type === "fault"
+                                    ? log[step]?.page
+                                    : "💿"}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-6">
+                    <div className="border border-slate-800 rounded-xl p-5 bg-[#020617]">
+                        <p className="text-sm text-slate-400">
+                            CPU reference string
+                        </p>
+                        <div className="flex gap-2 mt-3 flex-wrap">
+                            {ref.map((p, i) => (
                                 <div
                                     key={i}
                                     className={
-                                        isNewLoad
-                                            ? "bg-slate-800 px-3 py-2 rounded flex justify-between border border-cyan-400 shadow-[0_0_12px_rgba(34,211,238,0.6)] transition-all duration-500"
-                                            : "bg-slate-800 px-3 py-2 rounded flex justify-between border border-transparent"
+                                        i === step
+                                            ? "bg-cyan-400 text-black w-7 h-7 text-xs sm:w-8 sm:h-8 sm:text-sm flex items-center justify-center rounded shadow-[0_0_15px_rgba(34,211,238,0.8)] transition-all duration-500 scale-110"
+                                            : "bg-slate-800 w-7 h-7 text-xs sm:w-8 sm:h-8 sm:text-sm flex items-center justify-center rounded transition-all"
                                     }
                                 >
-                                    <span>
-                                        frame {i}
-                                    </span>
-                                    <span
+                                    {p}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="border border-slate-800 rounded-xl p-5 bg-[#020617]">
+                        <p className="text-sm text-slate-400">
+                            physical memory
+                        </p>
+                        <div className="mt-3 space-y-2">
+                            {memory.map((m, i) => {
+                                const isNewLoad =
+                                    log[step]?.type === "fault" &&
+                                    memory[i] === log[step]?.page
+                                return (
+                                    <div
+                                        key={i}
                                         className={
                                             isNewLoad
-                                                ? "text-cyan-400 font-semibold animate-pulse"
-                                                : "text-white"
+                                                ? "bg-slate-800 px-3 py-2 rounded flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-0 border border-cyan-400 shadow-[0_0_12px_rgba(34,211,238,0.6)] transition-all duration-500"
+                                                : "bg-slate-800 px-3 py-2 rounded flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-0 border border-transparent"
                                         }
                                     >
-                                        {m ?? "-"}
-                                    </span>
-                                </div>
-                            )
-                        })}
+                                        <span>
+                                            frame {i}
+                                        </span>
+                                        <span
+                                            className={
+                                                isNewLoad
+                                                    ? "text-cyan-400 font-semibold animate-pulse"
+                                                    : "text-white"
+                                            }
+                                        >
+                                            {m ?? "-"}
+                                        </span>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </div>
-                </div>
-                <div className="border border-slate-800 rounded-xl p-5 bg-[#020617]">
-                    <p className="text-sm text-slate-400">
-                        step explanation
-                    </p>
-                    <div className="mt-3 text-sm transition-all duration-500">
-                        {log[step]?.type === "hit" &&
-                            <span className="text-green-400 animate-pulse">
-                                {log[step].message}
-                            </span>
-                        }
-                        {log[step]?.type === "fault" &&
-                            <span className="text-red-400 animate-pulse">
-                                {log[step].message}
-                            </span>
-                        }
-                        {log[step]?.type === "full" &&
-                            <span className="text-yellow-400 animate-pulse">
-                                {log[step].message}
-                            </span>
-                        }
+                    <div className="border border-slate-800 rounded-xl p-5 bg-[#020617]">
+                        <p className="text-sm text-slate-400">
+                            step explanation
+                        </p>
+                        <div className="mt-3 text-sm transition-all duration-500">
+                            {log[step]?.type === "hit" &&
+                                <span className="text-green-400 animate-pulse">
+                                    {log[step].message}
+                                </span>
+                            }
+                            {log[step]?.type === "fault" &&
+                                <span className="text-red-400 animate-pulse">
+                                    {log[step].message}
+                                </span>
+                            }
+                            {log[step]?.type === "full" &&
+                                <span className="text-yellow-400 animate-pulse">
+                                    {log[step].message}
+                                </span>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
+            </div>   
+            )
 }

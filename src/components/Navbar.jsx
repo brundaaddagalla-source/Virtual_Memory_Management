@@ -3,7 +3,9 @@ import { NavLink } from "react-router-dom"
 export default function Navbar() {
 
   const navClass = ({ isActive }) =>
-    `btn ${isActive ? "text-white border-cyan-400 shadow-[0_0_18px_rgba(34,211,238,0.35)]" : ""}`
+    `btn text-xs px-2 py-1 sm:text-sm sm:px-3 sm:py-1 ${
+  isActive ? "text-white border-cyan-400 shadow-[0_0_18px_rgba(34,211,238,0.35)]" : ""
+}`
 
   return (
 
