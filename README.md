@@ -32,6 +32,10 @@ An interactive system to simulate and analyze page replacement algorithms with s
 - npm install
 - npm run dev
 
+## Live Demo
+
+- https://virtual-memory-management.vercel.app/
+
 ## Algorithms Implemented
 
 - FIFO (First-In First-Out)
