@@ -306,7 +306,7 @@ export default function Allocation() {
     /* ================= UI ================= */
 
     return (
-        <div className="px-6 xl:px-20 py-8">
+        <div className="w-full">
             <Popup message={popup} onClose={() => setPopup("")} />
 
             <div className="mb-6">

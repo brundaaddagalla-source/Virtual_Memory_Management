@@ -61,7 +61,7 @@ export default function Compare() {
     }, [input, frames])
 
     return (
-        <div className="w-full space-y-6 px-4 sm:px-6">
+        <div className="w-full">
 
             <Popup message={popup} onClose={() => setPopup("")} />
 
@@ -80,7 +80,7 @@ export default function Compare() {
             <div className="mt-6 border border-slate-800 rounded-xl p-5 bg-[#020617]">
 
                 <div className="flex flex-col gap-4">
-                    
+                    <div className="flex flex-col sm:flex-row gap-4">
                         <input
                             value={input}
                             onChange={e => setInput(e.target.value)}
@@ -91,17 +91,17 @@ export default function Compare() {
                         <input
                             value={frames}
                             onChange={e => setFrames(e.target.value)}
-                            className="w-full sm:w-20 bg-transparent border border-slate-700 rounded-lg px-3 py-2 text-sm outline-none focus:border-cyan-400"
+                            className="w-full max-w-[120px] bg-transparent border border-slate-700 rounded-lg px-3 py-2 text-sm outline-none focus:border-cyan-400"
                             placeholder="Frames"
                         />
-                    
 
+                    </div>
 
 
                     <button
                         onClick={run}
                         disabled={!input || !frames}
-                        className={`w-full sm:w-auto px-5 rounded-lg text-sm font-semibold transition ${!input || !frames
+                        className={`w-full sm:w-[200px] px-5 py-2 rounded-lg text-sm font-semibold transition ${!input || !frames
                             ? "bg-slate-700 text-slate-400 cursor-not-allowed"
                             : "bg-cyan-400 hover:bg-cyan-300 text-black"
                             }`}

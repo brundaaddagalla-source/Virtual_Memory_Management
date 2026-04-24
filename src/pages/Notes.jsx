@@ -1,6 +1,6 @@
 export default function Notes() {
     return (
-        <div className="max-w-6xl mx-auto px-6 py-14">
+        <div className="w-full">
             <div className="inline-block text-[11px] px-3 py-1 rounded-full bg-yellow-400/10 text-yellow-300 tracking-widest">
                 CHEAT SHEET
             </div>

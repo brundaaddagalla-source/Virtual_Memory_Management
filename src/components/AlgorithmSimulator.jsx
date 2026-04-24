@@ -274,7 +274,7 @@ export default function AlgorithmSimulator({ title, algorithm, notes }) {
                             {textbookExamples.find(e => e.data === refString)?.note}
                         </div>
 
-                        <div className="flex flex-wrap gap-2 mt-4 mb-4">
+                        <div className="grid grid-cols-2 sm:flex flex-wrap gap-2 mt-4 mb-4">
                             <button
                                 onClick={buildTrace}
                                 disabled={!refString || !framesCount}
@@ -350,7 +350,7 @@ export default function AlgorithmSimulator({ title, algorithm, notes }) {
                         <p className="label">REFERENCE STRING</p>
                         <div className="flex gap-2 flex-wrap">
                             {refs.map((n, i) => (
-                                <div key={`ref-${i}`} className={`cell ${i === currentStep ? "activeCell scale-110 ring-2 ring-cyan-400" : ""}`}>
+                                <div key={`ref-${i}`} className={`cell text-xs sm:text-sm ${i === currentStep ? "activeCell scale-110 ring-2 ring-cyan-400" : ""}`}>
                                     {n}
                                 </div>
                             ))}
@@ -359,7 +359,7 @@ export default function AlgorithmSimulator({ title, algorithm, notes }) {
 
                     <div className="card sectionGlow">
                         <p className="label">MEMORY FRAMES</p>
-                        <div className="flex gap-4">
+                        <div className="flex gap-2 sm:gap-4 flex-wrap">
                             {Array(frameCount).fill(0).map((_, i) => {
 
                                 const value = stepData.frames?.[i]
@@ -385,7 +385,7 @@ ${event?.frameIndex === i && event?.type === "fault" ? "faultFrame" : ""}
                     <div className="card sectionGlow">
                         <p className="label">STEP HISTORY</p>
 
-                        <div className="max-h-[420px] overflow-auto">
+                        <div className="max-h-[420px] overflow-auto overflow-x-auto">
 
                             <table className="table">
                                 <tbody>
@@ -443,7 +443,7 @@ ${event?.frameIndex === i && event?.type === "fault" ? "faultFrame" : ""}
                 </div>
 
                 {/* RIGHT PANEL */}
-                <div className="space-y-4 sticky top-4 h-fit self-start">
+                <div className="space-y-4 xl:sticky xl:top-4 h-fit self-start">
 
                     <div className="card sectionGlow">
 
