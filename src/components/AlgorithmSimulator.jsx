@@ -412,7 +412,7 @@ ${event?.frameIndex === i && event?.type === "fault" ? "faultFrame" : ""}
                                 </tbody>
                             </table>
 
-                            <div className="flex gap-1 mt-2">
+                            <div className="flex gap-[2px] sm:gap-1 mt-2 overflow-x-auto">
                                 {refs.map((_, i) => {
 
                                     if (i > currentStep) {
@@ -428,7 +428,7 @@ ${event?.frameIndex === i && event?.type === "fault" ? "faultFrame" : ""}
                                     return (
                                         <div
                                             key={`result-${i}`}
-                                            className={`w-[39px] text-center text-xs font-semibold ${type === "hit" ? "text-green-400" : "text-red-400"}`}
+                                            className="min-w-[28px] sm:min-w-[39px] text-center text-[10px] sm:text-xs font-semibold flex-shrink-0 ..."
                                         >
                                             {type === "hit" ? "H" : "F"}
                                         </div>
