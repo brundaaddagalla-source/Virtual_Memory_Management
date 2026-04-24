@@ -3,25 +3,28 @@ import { useEffect, useState } from "react"
 
 export default function Home() {
     return (
-        <div className="w-full px-6 xl:px-20 py-16">
+        <div className="w-full px-4 sm:px-6 xl:px-20 py-16">
 
             <p className="text-xs tracking-[0.25em] text-cyan-400 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee,0_0_18px_#22d3ee]"></span>
                 VIRTUAL MEMORY • INTERACTIVE LAB
             </p>
 
-            <h1 className="text-7xl font-semibold mt-4 leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-semibold mt-4 leading-tight">
                 Learn memory management
-                <br />
+                <br className="hidden sm:block" />
                 by <span className="text-cyan-400">watching it happen</span>
-                <span className="text-slate-500 italic"> — not by reading about it.</span>
+                <br className="hidden sm:block" />
+                <span className="text-slate-500 italic">
+                    — not by reading about it.
+                </span>
             </h1>
 
             <p className="text-slate-400 mt-6 max-w-xl leading-relaxed">
                 Visualize demand paging, replacement algorithms, and frame allocation through interactive simulation.
             </p>
 
-            <div className="flex gap-4 mt-10">
+            <div className="flex flex-col sm:flex-row gap-4 mt-10">
 
                 <Link
                     to="/demand-paging"
@@ -46,7 +49,7 @@ export default function Home() {
 
             </div>
 
-            <div className="mt-28">
+            <div className="mt-16 sm:mt-28">
 
                 <p className="text-xs tracking-widest text-cyan-400">LEARNING FLOW</p>
 
@@ -97,7 +100,7 @@ export default function Home() {
 
             </div>
 
-            <div className="mt-32">
+            <div className="mt-20 sm:mt-32">
 
                 <p className="text-xs tracking-widest text-cyan-400">SIMULATORS</p>
 
@@ -272,7 +275,7 @@ function PathRow({ title, items, color }) {
                 {title}
             </p>
 
-            <div className="flex flex-wrap items-center gap-5">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-4 sm:gap-5">
 
                 {items.map((item, i) => {
 
@@ -287,7 +290,7 @@ function PathRow({ title, items, color }) {
                                 <Link
                                     to={item.link}
                                     onClick={() => toggle(item.label)}
-                                    className={`px-5 py-3 rounded-xl border bg-[#020617] font-medium transition hover:scale-105 ${colors[color]} ${done ? "shadow-[0_0_18px_rgba(34,211,238,0.35)]" : ""}`}
+                                    className={`px-3 py-2 text-sm sm:px-5 sm:py-3 sm:text-base rounded-xl border bg-[#020617] font-medium transition hover:scale-105 ${colors[color]} ${done ? "shadow-[0_0_18px_rgba(34,211,238,0.35)]" : ""}`}
                                 >
 
                                     {item.label}
@@ -301,7 +304,7 @@ function PathRow({ title, items, color }) {
                             </div>
 
                             {i !== items.length - 1 && (
-                                <div className="w-14 h-[2px] bg-slate-700" />
+                                <div className="hidden sm:block w-14 h-[2px] bg-slate-700" />
                             )}
 
                         </div>
