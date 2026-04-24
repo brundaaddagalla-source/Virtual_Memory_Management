@@ -385,57 +385,74 @@ ${event?.frameIndex === i && event?.type === "fault" ? "faultFrame" : ""}
                     <div className="card sectionGlow">
                         <p className="label">STEP HISTORY</p>
 
-                        <div className="max-h-[420px] overflow-auto overflow-x-auto">
+                        <div className="max-h-[420px] overflow-y-auto overflow-x-auto">
 
-                            <table className="table">
-                                <tbody>
-                                    {Array(frameCount).fill(0).map((_, row) => (
-                                        <tr key={`row-${row}`}>
-                                            {refs.map((_, col) => {
-                                                if (col > currentStep)
-                                                    return <td key={`cell-${row}-${col}`} className="tableCell">*</td>
+                            <div className="inline-block min-w-max">
 
-                                                const value = trace[col]?.frames?.[row]
-                                                const type = trace[col]?.events?.[0]?.type
-
+                                <div
+                                    className="grid"
+                                    style={{
+                                        gridTemplateColumns: `repeat(${refs.length}, minmax(40px, 1fr))`
+                                    }}
+                                >
+                                    {Array(frameCount).fill(0).map((_, row) =>
+                                        refs.map((_, col) => {
+                                            if (col > currentStep) {
                                                 return (
-                                                    <td
-                                                        key={`cell-${row}-${col}`}
-                                                        className={`tableCell ${type === "hit" ? "hitCell" : ""} ${type === "fault" ? "faultCell" : ""}`}
-                                                    >
-                                                        {value ?? "*"}
-                                                    </td>
+                                                    <div key={`${row}-${col}`} className="tableCell">
+                                                        *
+                                                    </div>
                                                 )
-                                            })}
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                            }
 
-                            <div className="flex gap-[2px] sm:gap-1 mt-2 overflow-x-auto">
-                                {refs.map((_, i) => {
+                                            const value = trace[col]?.frames?.[row]
+                                            const type = trace[col]?.events?.[0]?.type
 
-                                    if (i > currentStep) {
+                                            return (
+                                                <div
+                                                    key={`${row}-${col}`}
+                                                    className={`tableCell ${type === "hit" ? "hitCell" : ""} ${type === "fault" ? "faultCell" : ""}`}
+                                                >
+                                                    {value ?? "*"}
+                                                </div>
+                                            )
+                                        })
+                                    )}
+                                </div>
+                                <div
+                                    className="grid mt-1"
+                                    style={{ gridTemplateColumns: `repeat(${refs.length}, 1fr)` }}
+                                >
+                                    {refs.map((_, i) => {
+
+                                        if (i > currentStep) {
+                                            return (
+                                                <div
+                                                    key={i}
+                                                    className="tableCell text-slate-600 text-xs sm:text-sm text-center"
+                                                >
+                                                    *
+                                                </div>
+                                            )
+                                        }
+
+                                        const type = trace[i]?.events?.[0]?.type
+
                                         return (
-                                            <div key={`result-${i}`} className="w-[38px] text-center text-slate-600 text-xs">
-                                                *
+                                            <div
+                                                key={i}
+                                                className={`
+tableCell 
+`}
+                                            >
+                                                {type === "hit" ? "H" : "F"}
                                             </div>
                                         )
-                                    }
+                                    })}
+                                </div>
 
-                                    const type = trace[i]?.events?.[0]?.type
 
-                                    return (
-                                        <div
-                                            key={`result-${i}`}
-                                            className="min-w-[28px] sm:min-w-[39px] text-center text-[10px] sm:text-xs font-semibold flex-shrink-0 ..."
-                                        >
-                                            {type === "hit" ? "H" : "F"}
-                                        </div>
-                                    )
-                                })}
                             </div>
-
                         </div>
                     </div>
 
