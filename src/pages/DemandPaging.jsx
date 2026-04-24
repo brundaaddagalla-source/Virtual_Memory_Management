@@ -87,45 +87,51 @@ export default function DemandPaging() {
                 Pages are loaded only when required. Page fault occurs if page not in memory.
             </p>
             <div className="mt-6 border border-slate-800 rounded-xl p-5 bg-[#020617]">
-                <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
-                    <input
-                        value={input}
-                        onChange={e => setInput(e.target.value)}
-                        className="flex-1 bg-transparent border border-slate-700 rounded-lg px-3 py-2 text-sm outline-none focus:border-cyan-400"
-                        placeholder="Reference String"
-                    />
-                    <input
-                        value={frames}
-                        onChange={e => setFrames(e.target.value)}
-                        className="w-20 bg-transparent border border-slate-700 rounded-lg px-3 py-2 text-sm outline-none focus:border-cyan-400"
-                        placeholder="Frames"
-                    />
-                    <div className="w-full mt-4 sm:mt-2">
-                        <p className="label mb-2">Examples</p>
-                        <div className="flex flex-wrap gap-2">
-                            {textbookExamples.map((ex, i) => (
-                                <button
-                                    key={i}
-                                    onClick={() => {
-                                        setInput(ex.data)
-                                        setFrames(String(ex.frames))
-                                        setStep(0)
-                                    }}
-                                    className="chip"
-                                >
-                                    {ex.name}
-                                </button>
-                            ))}
+                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+                    <div className="flex flex-col gap-3 flex-1">
+
+                        <div className="flex gap-4 flex-wrap items-center flex-1">
+                            <input
+                                value={input}
+                                onChange={e => setInput(e.target.value)}
+                                className="flex-1 bg-transparent border border-slate-700 rounded-lg px-3 py-2 text-sm outline-none focus:border-cyan-400"
+                                placeholder="Reference String"
+                            />
+                            <input
+                                value={frames}
+                                onChange={e => setFrames(e.target.value)}
+                                className="w-20 bg-transparent border border-slate-700 rounded-lg px-3 py-2 text-sm outline-none focus:border-cyan-400"
+                                placeholder="Frames"
+                            />
                         </div>
 
-                        <p className="text-xs text-slate-400 mt-2">
-                            {textbookExamples.find(e => e.data === input)?.note}
-                        </p>
-                        <div className="flex justify-center sm:justify-end mt-3">
-                            <button className="btn-outline">
-                                Reset
-                            </button>
+                        <div>
+                            <p className="label mb-2">Examples</p>
+                            <div className="flex flex-wrap gap-2">
+                                {textbookExamples.map((ex, i) => (
+                                    <button
+                                        key={i}
+                                        onClick={() => {
+                                            setInput(ex.data)
+                                            setFrames(String(ex.frames))
+                                            setStep(0)
+                                        }}
+                                        className="chip"
+                                    >
+                                        {ex.name}
+                                    </button>
+                                ))}
+                            </div>
+
+                            <p className="text-xs text-slate-400 mt-2">
+                                {textbookExamples.find(e => e.data === input)?.note}
+                            </p>
                         </div>
+                    </div>
+                    <div className="flex justify-center lg:justify-end items-start">
+                        <button className="btn-outline">
+                            Reset
+                        </button>
                     </div>
                 </div>
                 <div className="mt-6 border border-slate-800 rounded-xl p-5 bg-[#020617]">
