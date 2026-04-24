@@ -1,16 +1,47 @@
-# React + Vite
+# Virtual Memory Management Visualizer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive simulator to understand and compare page replacement algorithms with step-by-step visualization and predictive learning.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Step-by-step simulation of page replacement algorithms
+- Supports FIFO, LRU, Optimal, NRU, and Second Chance
+- Interactive "predict next step" system for active learning
+- Real-time metrics: hits, faults, hit rate
+- Comparative analysis across algorithms
+- Frame allocation strategies visualization
+- Smart insights on locality and reuse patterns
 
-## React Compiler
+## What Makes This Unique
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Goes beyond static visualization — includes prediction-based learning
+- Highlights internal decision-making (why a page was replaced)
+- Provides pattern insights like locality and reuse distance
+- Designed for deep conceptual understanding, not just output generation
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React (Vite)
+- Tailwind CSS
+- JavaScript (ES6)
+
+## Run Locally
+
+git clone https://github.com/your-repo
+cd Virtual_Memory_Management
+npm install
+npm run dev
+
+## Algorithms Implemented
+
+- FIFO (First-In First-Out)
+- LRU (Least Recently Used)
+- Optimal (Belady’s Algorithm)
+- NRU (Not Recently Used)
+- Second Chance (Clock Algorithm)
+
+## Future Improvements
+
+- Add LFU algorithm
+- Visual graph comparisons
+- Performance benchmarking with large inputs
