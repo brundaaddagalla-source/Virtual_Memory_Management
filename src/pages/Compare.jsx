@@ -61,7 +61,7 @@ export default function Compare() {
     }, [input, frames])
 
     return (
-        <div className="w-full space-y-6">
+        <div className="w-full space-y-6 px-4 sm:px-6">
 
             <Popup message={popup} onClose={() => setPopup("")} />
 
@@ -79,28 +79,31 @@ export default function Compare() {
 
             <div className="mt-6 border border-slate-800 rounded-xl p-5 bg-[#020617]">
 
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-4">
+                    <div className="flex gap-4 flex-1">
+                        <input
+                            value={input}
+                            onChange={e => setInput(e.target.value)}
+                            className="flex-1 bg-transparent border border-slate-700 rounded-lg px-3 py-2 text-sm outline-none focus:border-cyan-400"
+                            placeholder="Reference String (eg: 1,2,3)"
+                        />
 
-                    <input
-                        value={input}
-                        onChange={e => setInput(e.target.value)}
-                        className="flex-1 bg-transparent border border-slate-700 rounded-lg px-3 py-2 text-sm outline-none focus:border-cyan-400"
-                        placeholder="Reference String (eg: 1,2,3)"
-                    />
+                        <input
+                            value={frames}
+                            onChange={e => setFrames(e.target.value)}
+                            className="w-full sm:w-20 bg-transparent border border-slate-700 rounded-lg px-3 py-2 text-sm outline-none focus:border-cyan-400"
+                            placeholder="Frames"
+                        />
+                    </div>
 
-                    <input
-                        value={frames}
-                        onChange={e => setFrames(e.target.value)}
-                        className="w-20 bg-transparent border border-slate-700 rounded-lg px-3 py-2 text-sm outline-none focus:border-cyan-400"
-                        placeholder="Frames"
-                    />
+
 
                     <button
                         onClick={run}
                         disabled={!input || !frames}
-                        className={`px-5 rounded-lg text-sm font-semibold transition ${!input || !frames
-                                ? "bg-slate-700 text-slate-400 cursor-not-allowed"
-                                : "bg-cyan-400 hover:bg-cyan-300 text-black"
+                        className={`w-full sm:w-auto px-5 rounded-lg text-sm font-semibold transition ${!input || !frames
+                            ? "bg-slate-700 text-slate-400 cursor-not-allowed"
+                            : "bg-cyan-400 hover:bg-cyan-300 text-black"
                             }`}
                     >
                         Compare
