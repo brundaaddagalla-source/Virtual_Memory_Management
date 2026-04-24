@@ -3,9 +3,11 @@ import { NavLink } from "react-router-dom"
 export default function Navbar() {
 
   const navClass = ({ isActive }) =>
-    `btn text-xs px-2 py-1 sm:text-sm sm:px-3 sm:py-1 ${
-  isActive ? "text-white border-cyan-400 shadow-[0_0_18px_rgba(34,211,238,0.35)]" : ""
-}`
+  `btn text-xs px-2 py-1 sm:text-sm sm:px-3 sm:py-1 ${
+    isActive
+      ? "text-white border-cyan-400 shadow-[0_0_18px_rgba(34,211,238,0.35)]"
+      : ""
+  }`
 
   return (
 
@@ -17,43 +19,43 @@ export default function Navbar() {
           memoryvisualizer
         </div>
 
-        <div className="flex gap-2 flex-wrap">
+        <div className="flex gap-2 overflow-x-auto whitespace-nowrap sm:overflow-visible sm:flex-wrap scrollbar-hide">
 
-          <NavLink to="/" className={navClass}>Home</NavLink>
+          <NavLink to="/" className={(props) => `${navClass(props)} shrink-0`}>Home</NavLink>
 
-          <NavLink to="/demand-paging" className={navClass}>
+          <NavLink to="/demand-paging" className={(props) => `${navClass(props)} shrink-0`}>
             Demand Paging
           </NavLink>
 
-          <NavLink to="/fifo" className={navClass}>
+          <NavLink to="/fifo" className={(props) => `${navClass(props)} shrink-0`}>
             FIFO
           </NavLink>
 
-          <NavLink to="/optimal" className={navClass}>
+          <NavLink to="/optimal" className={(props) => `${navClass(props)} shrink-0`}>
             Optimal
           </NavLink>
 
-          <NavLink to="/lru" className={navClass}>
+          <NavLink to="/lru" className={(props) => `${navClass(props)} shrink-0`}>
             LRU
           </NavLink>
 
-          <NavLink to="/nru" className={navClass}>
+          <NavLink to="/nru" className={(props) => `${navClass(props)} shrink-0`}>
             NRU
           </NavLink>
 
-          <NavLink to="/second-chance" className={navClass}>
+          <NavLink to="/second-chance" className={(props) => `${navClass(props)} shrink-0`}>
             Second Chance
           </NavLink>
 
-          <NavLink to="/allocation" className={navClass}>
+          <NavLink to="/allocation" className={(props) => `${navClass(props)} shrink-0`}>
             Allocation
           </NavLink>
 
-          <NavLink to="/compare" className={navClass}>
+          <NavLink to="/compare" className={(props) => `${navClass(props)} shrink-0`}>
             Compare
           </NavLink>
 
-          <NavLink to="/notes" className={navClass}>
+          <NavLink to="/notes" className={(props) => `${navClass(props)} shrink-0`}>
             Notes
           </NavLink>
 
