@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
+import Footer from "./components/Footer" 
 import Navbar from "./components/Navbar"
 import ErrorBoundary from "./components/ErrorBoundary"
 import Home from "./pages/Home"
@@ -49,6 +50,7 @@ export default function App() {
               </Routes>
             </ErrorBoundary>
           </main>
+          <Footer />
 
         </div>
       </div>
