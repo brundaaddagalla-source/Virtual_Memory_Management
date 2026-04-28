@@ -3,15 +3,21 @@ import { NavLink } from "react-router-dom"
 export default function Navbar() {
 
   const navClass = ({ isActive }) =>
-  `btn text-xs px-2 py-1 sm:text-sm sm:px-3 sm:py-1 ${
-    isActive
-      ? "text-white border-cyan-400 shadow-[0_0_18px_rgba(34,211,238,0.35)]"
-      : ""
+  `btn text-xs px-2 py-1 sm:text-sm sm:px-3 sm:py-1 
+  border border-white/10 transition-all duration-200
+  hover:text-white hover:border-cyan-400/40 
+  hover:shadow-[0_0_14px_rgba(34,211,238,0.25)]
+  ${isActive
+    ? "text-cyan-400 border-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.45)]"
+    : "text-slate-300"
   }`
 
   return (
 
-    <div className="sticky top-0 z-50 backdrop-blur border-b border-slate-800">
+    <div className="sticky top-0 z-50 
+      bg-[#020617]/80 backdrop-blur-md 
+      border-b border-cyan-400/10
+      shadow-[0_2px_20px_rgba(34,211,238,0.08)]">
 
       <div className="max-w-[1400px] mx-auto flex items-center justify-between px-6 py-3">
 
